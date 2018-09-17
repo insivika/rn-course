@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
 import ListItem from './src/components/ListItem/ListItem';
+import PlacesInput from './src/components/PlacesInput/PlacesInput'
 
 export default class App extends Component {
   state = {
@@ -15,14 +16,10 @@ export default class App extends Component {
     });
   };
 
-  placeSubmitHandler = () => {
-    if (this.state.placeName.trim() === "") {
-      return;
-    }
-
+  addPlaceHandler = (placeName) => {
     this.setState(prevState => {
       return {
-        places: prevState.places.concat(prevState.placeName)
+        places: prevState.places.concat(placeName)
       };
     });
   };
@@ -33,19 +30,7 @@ export default class App extends Component {
     ));
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            placeholder="An awesome place"
-            value={this.state.placeName}
-            onChangeText={this.placeNameChangedHandler}
-            style={styles.placeInput}
-          />
-          <Button
-            title="Add"
-            style={styles.placeButton}
-            onPress={this.placeSubmitHandler}
-          />
-        </View>
+          <PlacesInput onPlaceAdded={this.addPlaceHandler}/>
         <View style={styles.listContainer}>{placesOutput}</View>
       </View>
     );
