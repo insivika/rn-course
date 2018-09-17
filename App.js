@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, View} from "react-native";
 
 import ListItem from './src/components/ListItem/ListItem';
 import PlacesInput from './src/components/PlacesInput/PlacesInput';
@@ -26,16 +26,24 @@ export default class App extends Component {
     });
   };
 
+  placeDeletedHandler = (id) => {
+    this.setState(prevState => {
+      return {
+        places: prevState.places.filter((place, i) => {
+          return i !== id
+        })
+      }
+    });
+  }
+
   render() {
-    const placesOutput = this.state.places.map((place, i) => (
-      <ListItem key={i} placeName={place} />
-    ));
+
     return (
       <View style={styles.container}>
 
           <PlacesInput onPlaceAdded={this.addPlaceHandler}/>
 
-          <PlacesList places={this.state.places}/>
+          <PlacesList places={this.state.places} onItemDeleted={this.placeDeletedHandler}/>
 
       </View>
     );
