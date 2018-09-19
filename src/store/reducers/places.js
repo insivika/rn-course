@@ -1,5 +1,6 @@
 
 import {ADD_PLACE, DELETE_PLACE, SELECT_PLACE, DESELECT_PLACE} from '../actions/actionType'
+import placeImage from '../../assets/city.jpg';
 
 const intialState = ({
   places: [],
@@ -34,7 +35,7 @@ const reducer = (state = intialState, action) => {
             return place.key === action.placekey;
           })
         }
-        case DELETE_PLACE:
+        case DESELECT_PLACE:
           return {
             ...state,
             selectedPlace: null,
